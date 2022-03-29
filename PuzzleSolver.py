@@ -35,7 +35,7 @@ class PuzzleSolver:
                 self.anti_diagonal[i + j] = False
                 self.diagonal[i - j + self.N - 1] = False
 
-                if i < 7:
+                if i < self.N - 1:
                     # 求下一列的皇后位置
                     self.solve(i + 1)
                 else:
