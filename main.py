@@ -7,6 +7,7 @@ if __name__ == '__main__':
     puzzle_solver = PuzzleSolver(queen_num)
     puzzle_solver.solve(0)
     result = puzzle_solver.get_result()
+
     # 导出结果为表格
     checker_board = Checkerboard('test.xlsx')
     checker_board.play(result)

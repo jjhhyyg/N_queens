@@ -1,8 +1,10 @@
 import openpyxl
 from openpyxl.utils import get_column_letter, column_index_from_string
-from openpyxl.styles import PatternFill
+from openpyxl.styles import PatternFill, Alignment
+
 
 gray_fill = PatternFill("solid", start_color='C0C0C0')
+alignment_center = Alignment(horizontal='center', vertical='center')
 
 
 def clear_wb(wb):
@@ -42,6 +44,10 @@ class Checkerboard:
             # 创建sheet并控制范围
             sheet_name = 'Sheet' + str(num + 1)
             ws = wb.create_sheet(sheet_name)
+
+            for i in range(1, N + 1):
+                ws.column_dimensions[get_column_letter(i)].width = 3
+
             cells = ws.iter_rows(min_row=1, max_row=N, min_col=1, max_col=N)
 
             # 表示第几行
@@ -51,6 +57,7 @@ class Checkerboard:
                 for cell in row:
                     i, j = cell.row, cell.column
                     coordinate = str(j) + get_column_letter(i)
+                    cell.alignment = alignment_center
                     if (i + j) % 2 == 0:
                         cell.fill = gray_fill
                 cnt = cnt + 1
